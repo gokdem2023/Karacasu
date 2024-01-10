@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div>
+    <div>
+        <h3>Giris Yap</h3>
+        <hr>
+        <form method = "post">
+    
+            {% csrf_token %}
+            {{form.as_p}}
+            <br>
+            <button type = "submit", class = "btn btn-danger">Giriş Yap</button>
+
+        </form>
+    </div>
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<br>
+<form method = "post">
+    
+    {% csrf_token %}
+    {{form.as_p}}
+    <br>
+    <button type = "submit", class = "btn btn-danger">Kayıt Ol</button>
+
+
+</form>
+<hr>
+
+{% endblock body %}

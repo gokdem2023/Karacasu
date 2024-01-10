@@ -1,0 +1,109 @@
+
+{% extends "layout.html" %}
+
+{% block body %}
+
+<style>
+body{
+    background-color: lightblue;" class = "container";
+}
+.search-container {
+    margin: 10px;
+    padding: 0px;
+}
+
+.grid-container {
+    margin: 10px;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+h4 {
+    color: red;
+}
+
+</style>
+
+<!--<div style="margin-top:75px; margin-bottom:50px; background-color: lightblue;" class = "container"> -->
+
+    <div class="search-container">
+        <h5>
+            {% if request.user.is_authenticated %}
+                Kullanci Adi: {{request.user.username}}, ile giriş yapılmış
+            {% else %}
+                Giriş Yapılmamış
+            {% endif %}
+        </h5>
+    </div>
+<!--<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h3> Makaleler </h3>
+    <hr>
+
+    </div>
+
+</div>-->
+
+    <div>
+        <form class="search-container">
+            {% csrf_token %}
+            <input type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Ara...">
+            <button type="submit" class="btn btn-warning">Ara</button>
+        </form>
+        <hr>   
+    </div>  
+{% if articles %}
+
+{% for article in articles %}
+<div>
+    <div>
+    <br>
+        <!-- Post content-->
+        <div class="grid-container">
+
+            <div >
+                <a href="{% url 'article:detail' article.id %}"><h5 class="mt-4">{{article.title}}</h5></a>
+                <p> {{article.author.username}} <br>tarafından yayınlandı.
+                </p>
+                <p>{{article.created_date}}</p>
+            </div>
+
+            <div class="row align-items-center">   
+                       
+                {% if article.article_image %}
+                <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="" style="width:150px;" />
+                {% endif %}
+
+                {% if article.article_video %}
+                <video width="150" src="{{article.article_video.url}}" />
+
+                {% endif %}
+            </div>
+
+            <div class="row align-items-center">
+                <p class="lead" style="text-align:left">
+                {{article.content|safe|truncatewords:20}}
+                </p>
+                <a href="{% url 'article:detail' article.id %}" class="btn btn-info" style="text-align:left">Devamını Oku</a>
+            </div>
+
+            
+        </div>
+        <hr>  
+    </div>
+    
+    
+    <br>
+</div>
+</div>
+
+{% endfor %}
+
+{% else %}
+<div class = "alert alert-danger">
+    Makale bulunmadı
+</div>
+{% endif %}
+
+{% endblock body %}

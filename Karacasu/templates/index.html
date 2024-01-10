@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<style>
+    body{
+      background-image: url('/media/aurora.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    ul {
+        list-style-type: square;
+        list-style-position: inside;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<div class = "jumbotron text-center">
+    
+    <h3>Karacasu Sitesine Hoşgeldin</h3>
+    
+    <ul class="list">
+
+        <li>Bu sitede (giriş yaparak) herhangi bir konuda makale yazabilir, makalene fotograf/video ekleyebilir veya (giriş yapmadan) bir makale hakkında yorum yapabilirsin. </li>
+        <li>Sag üst köşedeki bar menüye basarak soldaki ana menü açılır veya kapatılabilir. </li>
+        <li>Giriş yaptıktan sonra soldaki menü'de (turuncu renkli) "Kontrol Paneli" linki görünecek. Bu link'i tıklayarak sana ait makalelere yeni makale ekleyebilir, güncelleyebilir veya silebilirsin.</li>
+        <li>Karacasu'nun hava durumu ile ilgili bilgi alabilirsin (Hergün meteoroloji'ye telefon edilip bilgiler alınıp site güncelleniyor.Bazen meteorolojiden arıyorlar düzeltme yapılması isteniyor. Karacasulu'lar için değer:).</li>
+        <li>Bu site amatör birisi tarafindan hazırlandığından kusurları görmezden gelebilir, düzeltimesi konusunda yeni makale ekleyebilirsin (opsiyonel)</li>
+
+    </ul>
+
+    <h5 style='color: red;'>
+        {% if request.user.is_authenticated %}
+            Kullanıcı Adı: {{request.user.username}}, ile giriş yapıldı.
+        {% else %}
+            Giriş Yapılmamış
+        {% endif %}
+    
+    </h5>
+</div>
+{% endblock body %}

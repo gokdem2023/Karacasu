@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+
+<style>
+
+.bosluk {
+  margin: 10px;
+  padding: 0px;
+}
+</style>
+
+<div class="bosluk">
+    <div>
+        <h3>Makale Güncelle</h3>
+        <hr>
+        <form method = "post">
+    
+            {% csrf_token %}
+            {{form.media}}
+            {{form.as_p}}
+            <br>
+            <button type = "submit", class = "btn btn-danger">Makale'yi Güncelle</button>
+
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

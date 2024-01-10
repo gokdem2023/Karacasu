@@ -1,0 +1,150 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+<style>
+    body{
+      background-image: url('/media/outlook.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .city {
+      font-family: "Lucida Console", "Courier New", monospace;
+      font-size:10px;
+      color: black;
+      margin: 10px;
+      padding: 10px;
+    }
+
+    .container, th, td {
+      font-family: "Lucida Console", "Courier New", monospace;
+      font-size:15px;
+      border: 1px solid white;
+      border-collapse: collapse;
+      }
+      th, td {
+      background-color: #96D4D4;
+    }
+
+</style>
+
+
+<div style="margin-top:50px; margin-bottom:25px; background-color: lightblue;" class = "container">
+    <b>
+    <br>
+    <h4 class="text-center"><u>Karacasu için önümüzdeki 7 günlük hava tahmini</u></h4><br>
+</div>
+
+<div class="city">           
+    <table class="table">
+      <thead> 
+      <tr>
+        <th style="text-align:left">Gün</th> 
+        <th style="text-align:center">Hava Kodu </th> 
+        <th>Mak Sıcaklık</th> 
+        <th>Min Sıcaklık</th> 
+        <!--<th>Güneş</th>--> 
+        <th>UV index</th> 
+        <th>Mak Rüzgar Hızı</th> 
+      </tr> 
+      </thead> 
+    <tr>
+      {% for _, record in d.iterrows %} 
+        <tr>
+					<td style="text-align:left"> {{ record.G }}</td> 
+          <td style="text-align:center">{{ record.K }}</td> 
+          <td style="text-align:center">{{ record.MA }}</td> 
+          <td style="text-align:center">{{ record.MI }}</td> 
+          <!--<td>{{ record.GNS }}</td>--> 
+          <td style="text-align:center">{{ record.UV }}</td> 
+          <td style="text-align:center">{{ record.H }}</td> 
+        </tr>      
+      {% endfor %}
+        </tr> 
+    </tr> 
+  </table> 
+</div>
+
+<div class="city">    
+  <table class="aciklama"> 
+    <thead> 
+      <tr>
+        <th>Hava Kodları</th>
+        <th>Açıklaması</th>
+      </tr>
+    </thead> 
+    <tr>
+      <td>0	</td>
+      <td>Açık Gökyüzü</td>
+    </tr>
+    <tr>
+      <td>1, 2, 3</td>
+      <td>Genel olarak açık, Parçalı Bulutlu ve Kapalı</td>
+    </tr>
+    <tr>
+      <td>45, 48</td>
+      <td>Sis ve Pus</td>
+    </tr>
+      <td>51, 53, 55</td>
+      <td>Çiseleyen Yağmur: Hafif, Orta, ve Yoğun</td>
+    </tr>
+    <tr>
+      <td>56, 57</td>
+      <td>Donan çiseleme: Hafif ve Yoğun</td>
+    </tr>
+    <tr>
+      <td>61, 63, 65</td>
+      <td>Yağmur: Hafifçe, Orta, Kuvvetli</td>
+    </tr>
+    <tr>
+      <td>66, 67</td>
+      <td>Buzlu Yağmur: Hafif ve Şiddetli</td>
+    </tr>
+    <tr>
+      <td>71, 73, 75</td>
+      <td>Karla Karışık : Hafif, Orta, Kuvvetli</td>
+    </tr>
+    <tr>
+      <td>77</td>
+      <td>Kar yağışlı</td>
+    </tr>
+    <tr>
+      <td>80, 81, 82</td>
+      <td>Aşırı Yağmur: Hafif, Orta, ve Şiddetli</td>
+    </tr>
+    <tr>
+      <td>85, 86</td>
+      <td>Aşırı Kar : Hafif ve Kuvvetli</td>
+    </tr>
+    <tr>
+      <td>95 *</td>
+      <td>Fırtına: Hafif veya Orta</td>
+    </tr>
+    <tr>
+      <td>96, 99 *</td>
+      <td>Hafif Fırtına ve Ağır Dolu</td>
+    </tr>
+  </table>
+</div>
+
+  <div id="example1">
+    <h4>En Güzel Günler henüz yaşanmadı  :)</h4>
+    <p>Hayırlı işler, Bol Güneşler</p>
+  </div>
+</div>
+
+{% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<style>
+
+
+h5 {
+  color: red;
+}
+
+</style>
+
+<div class="container">
+                <!-- Post content-->
+    <div>
+        <!-- Title-->
+        <h3 class="city">{{article.title}}</h3>
+        <!-- Author-->
+        <p class="city">
+            by
+            {{article.author.username}}
+        </p>
+        <hr />
+        <!-- Date and time-->
+        <p>{{article.created_date}}</p>
+        <hr />
+        <!-- Preview image-->
+        {% if article.article_image %}
+        <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="" />
+        {% endif %}
+
+
+        {% if article.article_video %}
+        <video width="640" height="480" controls>
+ 
+            <source src="{{article.article_video.url}}" type="video/mp4">
+            <source src="{{article.article_video.url}}"  type="video/ogg">
+
+        </video>
+        {% endif %}
+        
+        <hr />
+        <!-- Post content-->
+        <!--<p class="city">-->
+        <p>
+        <h6>{{article.content|safe}} </h6>
+        </p>
+        <hr>
+
+        <h3>Yorumlar</h3>
+        <hr>
+        {% if comments %}
+        {% for comment in comments %}
+            <!--<div class="media mb-4">-->
+            <div>
+                <div class="media-body">
+                    <h5 class="mt-0">{{comment.comment_author}}</h5>
+                    <h6 class="mt-0">{{comment.comment_date}}</h6>
+                    <h6 class="mt-0">{{comment.comment_content}}</h6>
+                </div>
+                <hr>
+            </div>
+        
+        {% endfor %}
+
+        {% else %}
+        <div class = "alert alert-danger">
+        Bu Makaleye herhangibir yorum yazılmamış. İlk yorum yapan sen ol.
+        </div>
+        {% endif %}    
+        <div>
+
+            <h4 class="card-header">Yorum Ekle:</h4>
+            <div class="card-body">
+                <form method = "post" action = "{% url 'article:comment' article.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Isim</label>
+                        <input name="comment_author" type="text" class="form-control" id="formGroupExampleInput" placeholder="Isminizi Girin">
+
+                        <label for="formGroupExampleInput">Yorum</label>
+                        <textarea name= "comment_content" class="form-control" rows="3"> </textarea>
+
+                        <button type="submit", class="btn btn-primary">Ekle</button>
+                    </div>
+                </form>
+            </div>
+        </div>                    
+    </div>    
+</div>
+
+{% endblock body %}
+
+
+
